@@ -1,0 +1,34 @@
+. What we've built so far
+Right now we're building an AI Business Operations SaaS, but we're intentionally starting with the normal business application before touching the AI. The final goal is to have a platform where businesses can manage customers, products, orders, inventory, documents, analytics, and eventually interact with an AI agent that can query real business data, use LangChain tools, run LangGraph workflows, use RAG, perform approved actions, and later connect to Shopify.    Pasted markdown
+So far, we've created the initial Next.js application using JavaScript and plain CSS, set up PostgreSQL as our database, connected it through Prisma 7, configured the Prisma database connection, and created our first database models: User, Organization, and OrganizationMember. This establishes the multi-tenant foundation where users belong to organizations and business data will belong to those organizations. We also created and tested a basic /api/users endpoint to confirm that Next.js → Prisma → PostgreSQL is working. Then we built the signup API so users can be created, followed by the organization creation flow where a user can create an organization and become an OrganizationMember. After that, we added the Customer model connected to an organization and created the initial customer API. So currently we're at the point where our backend has the foundation for users → organizations → customers, with PostgreSQL storing the actual data.    Pasted markdown
+Our next backend progression is:
+User
+  ↓
+Organization
+  ↓
+Customers
+  ↓
+Products
+  ↓
+Orders
+  ↓
+Inventory
+  ↓
+Dashboard
+  ↓
+AI Assistant
+  ↓
+LangChain Tools
+  ↓
+LangGraph
+  ↓
+RAG
+  ↓
+AI Actions
+  ↓
+Human Approval
+  ↓
+Shopify
+
+We're deliberately not using Shopify yet. We'll first build our own internal business data, then later Shopify will become an external integration/data source. That's also how your original plan structures the proje
+

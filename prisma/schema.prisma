@@ -23,6 +23,8 @@ model Organization {
 
   members OrganizationMember[]
   customer  Customer[]
+  products Product[]
+  orders  Order[]
 }
 
 model OrganizationMember {
@@ -46,5 +48,42 @@ model Customer{
       organizationId String
       organization Organization @relation(fields: [organizationId] , references : [id])
       createdAt DateTime @default(now())
-      
+      orders  Order[]
+}
+
+
+model Product{
+     id        String   @id @default(cuid())
+     name String 
+     description String
+     price Float
+     sku String
+     organizationId String
+     organization Organization @relation(fields : [organizationId] , references: [id])
+     createdAt  DateTime @default(now())
+     orderItem OrderItem[]
+}
+
+
+model Order{
+        id        String   @id @default(cuid())
+        organizationId String
+        organization Organization @relation(fields : [organizationId] , references: [id])
+        customerId String
+        customer Customer @relation (fields :[customerId] , references:[id])
+        totalAmount Float
+        status String @default("PENDING")
+        items OrderItem[]
+        createdAt DateTime @default(now())
+        updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
 }

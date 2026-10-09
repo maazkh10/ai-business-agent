@@ -23,6 +23,7 @@ model Organization {
 
   members  OrganizationMember[]
   customer Customer[]
+  products Product[]
 }
 
 model OrganizationMember {
@@ -42,6 +43,17 @@ model Customer {
   name           String
   email          String       @unique
   phone          String       @unique
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  createdAt      DateTime     @default(now())
+}
+
+model Product {
+  id             String       @id @default(cuid())
+  name           String
+  description    String
+  price          Float
+  sku            String
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id])
   createdAt      DateTime     @default(now())
